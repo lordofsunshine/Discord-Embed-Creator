@@ -73,8 +73,8 @@
               <div v-if="embed.description">{{ embed.description }}</div>
               <div class="fields-container">
                 <div v-for="field in fields" :key="field.name" class="field-preview" :class="{ 'inline-field': field.inline }">
-                  <div class="font-semibold" v-if="field.name">{{ field.name }}</div>
-                  <div v-if="field.value">{{ field.value }}</div>
+                  <div class="font-semibold field-name" v-if="field.name">{{ field.name }}</div>
+                  <div class="field-value" v-if="field.value">{{ field.value }}</div>
                 </div>
               </div>
             </div>
