@@ -246,6 +246,19 @@ text-decoration: none;
 cursor: pointer;
 }
 
+.field-name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.field-value {
+  width: 100%;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
