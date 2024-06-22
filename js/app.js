@@ -102,21 +102,14 @@ new Vue({
   }
 });
 
-
-
 document.addEventListener('DOMContentLoaded', (event) => {
-  // Получите модальное окно
   var modal = document.getElementById('myModal');
-
-  // Получите элемент <span>, который закрывает модальное окно
   var span = document.getElementsByClassName('close')[0];
 
-  // Когда пользователь нажимает на <span> (x), закройте модальное окно
   span.onclick = function() {
     modal.style.display = 'none';
   }
 
-  // Когда пользователь кликает в любом месте за пределами модального окна, закройте его
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = 'none';
