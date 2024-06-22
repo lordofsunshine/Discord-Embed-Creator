@@ -1,118 +1,89 @@
 new Vue({
   el: '#app',
   data: {
-    fields: [
-      { name: 'Field 1', value: 'Value 1', inline: true },
-      { name: 'Field 2', value: 'Value 2', inline: true },
-    ],
     embed: {
-      title: 'Discord Embed Creator',
-      description: 'Discord Embed Creator is a tool that allows users to create custom embeds for Discord. Embeds are used to enhance the visual presentation of messages in Discord by adding colors, fields, images, and other styling elements. With an Embed Creator, you can easily customize the title, description, color, and other settings of an embed without delving into the details of coding the JSON structure typically required for creating embeds in Discord.', 
-      author: 'About us',
-      imageURL: 'https://cdn.glitch.global/de93c334-a8c2-4333-808c-da266614e993/PREVIEw.jpg?v=1718899614471',
-      thumbnailURL: 'https://cdn.glitch.global/de93c334-a8c2-4333-808c-da266614e993/p.jpg?v=1718899691631', 
-      color: '#d2d2d2',
+      title: '',
+      description: '',
+      color: '#D3D3D3',
+      author: '',
+      thumbnailURL: '',
+      imageURL: ''
     },
+    fields: [],
     webhookUrl: '',
-    field: {
-      inline: false
-    }
+    webhookDetails: null,
   },
   methods: {
-    toggleCheckbox(index) {
-      this.fields[index].inline = !this.fields[index].inline;
-    },
-    toggleInline: function(index) {
-      this.fields[index].inline = !this.fields[index].inline;
-    },
     addField() {
       this.fields.push({ name: '', value: '', inline: false });
     },
     removeField(index) {
       this.fields.splice(index, 1);
     },
-    clearFields() {
-      this.embed.title = '';
-      this.embed.description = '';
-      this.embed.author = '';
-      this.embed.imageURL = '';
-      this.embed.thumbnailURL = '';
-      this.embed.color = '#000000'; 
-      this.fields = [];
+    toggleCheckbox(index) {
+      this.fields[index].inline = !this.fields[index].inline;
     },
-    showModal(message) {
-      const modal = document.getElementById('myModal');
-      const modalText = document.getElementById('modalText');
-      modalText.textContent = message;
-      modal.style.display = 'block';
+    fetchWebhookDetails() {
+      if (!this.webhookUrl) return;
+
+      fetch(this.webhookUrl)
+        .then(response => response.json())
+        .then(data => {
+          this.webhookDetails = data;
+        })
+        .catch(error => {
+          console.error('Error fetching webhook details:', error);
+        });
+    },
+    getAvatarUrl() {
+      return this.webhookDetails && this.webhookDetails.avatar 
+        ? `https://cdn.discordapp.com/avatars/${this.webhookDetails.id}/${this.webhookDetails.avatar}.png` 
+        : '../default-avatar.png';
     },
     postWebhook() {
-      if (!this.webhookUrl) {
-        this.showModal('Please provide a webhook URL.'); // Замена alert
-        return;
-      }
+      const embed = {
+        title: this.embed.title,
+        description: this.embed.description,
+        color: parseInt(this.embed.color.replace('#', ''), 16),
+        author: this.embed.author ? { name: this.embed.author } : undefined,
+        fields: this.fields,
+        thumbnail: this.embed.thumbnailURL ? { url: this.embed.thumbnailURL } : undefined,
+        image: this.embed.imageURL ? { url: this.embed.imageURL } : undefined,
+      };
+
       const payload = {
-        embeds: [
-          {
-            title: this.embed.title,
-            description: this.embed.description,
-            author: { name: this.embed.author },
-            image: { url: this.embed.imageURL },
-            thumbnail: { url: this.embed.thumbnailURL },
-            color: parseInt(this.embed.color.replace('#', ''), 16),
-            fields: this.fields.map(field => ({
-              name: field.name,
-              value: field.value,
-              inline: field.inline,
-            })),
-          }
-        ]
+        embeds: [embed]
       };
 
       fetch(this.webhookUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        })
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
         .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to post to webhook.');
+          if (response.ok) {
+            alert('Message sent successfully');
+          } else {
+            alert('Failed to send message');
           }
-          this.showModal('Embed successfully posted to the webhook.');
         })
         .catch(error => {
-          console.error(error);
-          this.showModal('Error posting embed to the webhook.');
+          console.error('Error posting webhook:', error);
+          alert('Error posting webhook');
         });
-      },
-    updateBorderColor() {
-      const element = document.querySelector('.element');
-      element.style.borderLeftColor = this.embed.color;
-    }
-  },
-  watch: {
-    'embed.color': function(newVal, oldVal) {
-      this.updateBorderColor();
-    }
-  },
-  mounted() {
-    this.updateBorderColor();
-  }
-});
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  var modal = document.getElementById('myModal');
-  var span = document.getElementsByClassName('close')[0];
-
-  span.onclick = function() {
-    modal.style.display = 'none';
-  }
-
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = 'none';
+    },
+    clearFields() {
+      this.embed.title = '';
+      this.embed.description = '';
+      this.embed.color = '#000000';
+      this.embed.author = '';
+      this.embed.thumbnailURL = '';
+      this.embed.imageURL = '';
+      this.fields = [];
+      this.webhookUrl = '';
+      this.webhookDetails = null;
     }
   }
 });
