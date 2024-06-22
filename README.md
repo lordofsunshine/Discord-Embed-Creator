@@ -9,7 +9,7 @@ Discord Embed Creator is a user-friendly tool designed to simplify the creation 
 <img src="https://cdn.glitch.global/de93c334-a8c2-4333-808c-da266614e993/ppreview.png?v=1719066842977" alt="Preview" width="500px" height="auto">
 
 ## ⭐ Star
-Did you like the repository? Put an asterisk, thank you! ❤️
+Did you like the repository? Put an asterisk, thank you!
 
-Made in HTML, CSS, JavaScript, VueJS and Love...
+Made in HTML, CSS, JavaScript, VueJS and ❤️...
 * developed by lordofsunshine
