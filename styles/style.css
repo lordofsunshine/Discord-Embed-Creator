@@ -2,24 +2,21 @@
   display: flex;
   gap: 40px;
   justify-content: space-between;
+  height: max-content;
 }
-
 .column {
   display: flex;
   width: 50%;
   flex-direction: column;
 }
-
 .element {
   width: 100%;
 }
-
 .element {
 border-left: 4px solid;
 border-left-color: inherit;
 border-radius: 6px;
 }
-
 .text {
   margin-left: auto;
   height: 100%;
@@ -49,11 +46,9 @@ border-radius: 6px;
   transition: all 0.3s;
   font-weight: 600;
 }
-
 .webhook-btn:hover {
   opacity: 0.6;
 }
-
 .clear-btn {
   display: block;
   width: 100%;
@@ -65,16 +60,13 @@ border-radius: 6px;
   transition: all 0.3s;
   font-weight: 600;
 }
-
 .clear-btn:hover {
   opacity: 0.6;
 }
-
 .group {
   display: flex;
   gap: 10px;
 }
-
 .btn-add {
   width: 100%;
   background: #2f2f2f;
@@ -83,11 +75,9 @@ border-radius: 6px;
   transition: all 0.3s;
   border: 0;
 }
-
 .btn-add:hover {
   opacity: 0.7;
 }
-
 .remove-btn {
   background: #cb3539;
   font-weight: 500;
@@ -95,22 +85,18 @@ border-radius: 6px;
   transition: all 0.3s;
   border: 0;
 }
-
 .remove-btn:hover {
   opacity: 0.7;
 }
-
 .thumbnail-preview {
 overflow: hidden;
 }
-
 .thumbnail-preview img {
   padding: 0;
   width: 60px;
   border-radius: 12px;
   height: 60px;
 }
-
 .image-preview {
   margin: 20px 0;
   border-radius: 8px;
@@ -129,7 +115,6 @@ overflow: hidden;
   user-select: none;
   margin: 5px 0;
 }
-
 .checkbox-container input {
 position: absolute;
 opacity: 0;
@@ -137,7 +122,6 @@ cursor: pointer;
 height: 0;
 width: 0;
 }
-
 .checkmark {
   height: 25px;
   width: 25px;
@@ -147,25 +131,20 @@ width: 0;
   transition: all 0.3s;
   border-radius: 4px;
 }
-
 .checkbox-container:hover input ~ .checkmark {
 background-color: #121212;
 }
-
 .checkbox-container input:checked ~ .checkmark {
 background-color: #1c1c1c;
 }
-
 .checkmark:after {
 content: "";
 position: absolute;
 display: none;
 }
-
 .checkbox-container input:checked ~ .checkmark:after {
 display: block;
 }
-
 .checkbox-container .checkmark:after {
 left: 9px;
 top: 5px;
@@ -177,7 +156,6 @@ border-width: 0 3px 3px 0;
 -ms-transform: rotate(45deg);
 transform: rotate(45deg);
 }
-
 .field-preview {
 display: inline-block; 
 margin-right: 10px; 
@@ -192,11 +170,9 @@ gap: 10px;
 margin-bottom: 10px; 
 width: 100%; 
 }
-
 .inline-field {
 flex: 0 0 auto; 
 }
-
 .inline-field {
 width: calc(33.333% - 10px); 
 }
@@ -205,7 +181,6 @@ width: calc(33.333% - 10px);
   align-items: center;
   justify-content: space-between;
 }
-
 .modal {
   display: none;
   position: fixed;
@@ -219,7 +194,6 @@ width: calc(33.333% - 10px);
   backdrop-filter: blur(10px);
   background-color: rgba(0, 0, 0, 0.4);
 }
-
 .modal-content {
   display: flex;
   align-items: center;
@@ -230,7 +204,6 @@ width: calc(33.333% - 10px);
   padding: 20px;
   border: 1px solid #1c1c1c;
 }
-
 .close {
 color: #ededed;
 float: right;
@@ -238,14 +211,12 @@ font-size: 28px;
 font-weight: bold;
 transition: all 0.3s;
 }
-
 .close:hover,
 .close:focus {
 color: #bababa;
 text-decoration: none;
 cursor: pointer;
 }
-
 .field-name {
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -258,7 +229,33 @@ cursor: pointer;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-
+.webhook-element {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.webhookDetails {
+  padding: 4px 10px;
+  border-radius: 16px;
+  background: #151515;
+  border: 1px solid #222222;
+}
+.webhookAvatar {
+    width: 50px;
+    height: auto;
+    border: 1px solid #222222;
+    margin-bottom: 0;
+}
+.idWebhook {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: auto;
+  color: #919191;
+}
+.mt-2 {
+    margin: 20px 0 !important;
+}
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -267,7 +264,7 @@ cursor: pointer;
 }
 
 ::-webkit-resizer {
-  background-image: url(resize.svg);
+  background-image: url(../resize.svg);
   background-repeat: no-repeat;
   background-position: right bottom;
 } 
@@ -276,3 +273,12 @@ cursor: pointer;
   background: hsl(0deg 0% 85.92% / 10%);
   text-shadow: none;
 }
+
+@media only screen and (max-device-width: 870px) {
+  .fields-container {
+      display: block;
+  }
+  .inline-field {
+      width: 100%;
+  }
+   }
